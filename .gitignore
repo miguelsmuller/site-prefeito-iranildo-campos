@@ -1,0 +1,13 @@
+Thumbs.db
+.DS_Store
+*.sql
+*.log
+.env
+.Identifier
+
+theme/bin/node_modules
+theme/bin/node_modules/
+theme/bin/.sass-cache/
+
+theme/assets/components/*
+!theme/assets/components/.gitkeep

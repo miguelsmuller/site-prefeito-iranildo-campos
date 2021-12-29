@@ -1,0 +1,47 @@
+/* # SYSTEM
+================================================== */
+html {
+	@include box-sizing(border-box);
+}
+
+*,
+*:before,
+*:after {
+	@include box-sizing(inherit);
+	text-rendering: optimizeLegibility;
+}
+
+*{
+	margin: 0px;
+	padding: 0px;
+}
+
+/* # CLEARFIX
+================================================== */
+.clearfix{
+	@include clearfix();
+}
+
+/* # CLEARFIX
+================================================== */
+section{
+	@include clearfix();
+}
+
+/* # CLEARFIX
+================================================== */
+.collapse{
+	display: none;
+
+	&.in{
+		display: block !important;
+	}
+}
+
+.collapsing {
+	display: block !important;
+	height: 0px;
+	overflow: hidden;
+	position: relative;
+	@include transition(height .35s ease);
+}

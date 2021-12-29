@@ -1,0 +1,65 @@
+version: "3.9"
+
+services:
+  wordpress:
+    image: wordpress:4.2.4-apache
+    environment:
+      WORDPRESS_DB_HOST: database:3306
+      WORDPRESS_DB_NAME: ${MYSQL_DATABASE}
+      WORDPRESS_DB_USER: ${MYSQL_USER}
+      WORDPRESS_DB_PASSWORD: ${MYSQL_PASSWORD}
+      WORDPRESS_TABLE_PREFIX: ${WORDPRESS_TABLE_PREFIX}
+      WORDPRESS_DEBUG: ${WORDPRESS_DEBUG:-false}
+    env_file: .env
+    restart: always
+    volumes:
+      - wp_data:/var/www/html # Full wordpress project
+      - ./theme:/var/www/html/wp-content/themes/iranildo-campos-theme
+      - ./plugin:/var/www/html/wp-content/plugins/devim-core-plugin
+    ports:
+      - ${WORDPRESS_PORT}:80
+    depends_on:
+      - database
+
+  cli:
+    image: wordpress:cli-2.1-php5.6
+    env_file: .env
+    user: root
+    #user: xfs
+    depends_on:
+      - database
+      - wordpress
+    volumes:
+      - wp_data:/var/www/html
+      - ./docker:/docker
+
+  database:
+    image: mariadb:10.5.9
+    environment:
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+      MYSQL_DATABASE: ${MYSQL_DATABASE}
+      MYSQL_USER: ${MYSQL_USER}
+      MYSQL_PASSWORD: ${MYSQL_PASSWORD}
+    restart: always
+    volumes:
+      - db_data:/var/lib/mysql
+    healthcheck:
+      test: mysqladmin ping -h 127.0.0.1 -u root --password=${MYSQL_PASSWORD}
+      interval: 5s
+      retries: 5
+
+  manage:
+    image: phpmyadmin:5
+    environment:
+      PMA_HOST: database
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+    ports:
+      - ${MANAGE_PORT}:80
+    restart: always
+    depends_on:
+      database:
+        condition: service_healthy
+
+volumes:
+  db_data:
+  wp_data:

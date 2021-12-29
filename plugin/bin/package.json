@@ -1,0 +1,27 @@
+{
+	"name": "devim-core-plugin",
+	"title": "Devim Core Plugin",
+	"homepage": "https://bitbucket.org/devim/devim-core-plugin",
+	"version": "1.0.0",
+	"description": "Devim Core Plugin",
+	"author": {
+		"name": "Miguel Muller",
+		"email": "miguel.sneto[at]devim.com",
+		"url": "https://github.com/miguelsmuller"
+	},
+	"dependencies": {},
+	"devDependencies": {
+		"grunt": "^0.4.5",
+		"grunt-contrib-compass": "^1.0.1",
+		"grunt-contrib-imagemin": "^0.9.3",
+		"grunt-contrib-jshint": "^0.11.0",
+		"grunt-contrib-uglify": "^0.8.0",
+		"grunt-contrib-watch": "^0.6.1",
+		"grunt-shell": "^1.1.2",
+		"load-grunt-tasks": "^3.1.0"
+	},
+	"engines": {
+		"node": ">=0.8.0",
+		"npm": ">=1.1.0"
+	}
+}

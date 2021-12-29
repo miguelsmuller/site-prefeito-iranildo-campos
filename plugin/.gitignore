@@ -1,0 +1,17 @@
+# #######################
+# GENERAL FILES
+# #######################
+
+### OS FILES
+Thumbs.db
+.DS_Store
+
+### DB AND LOG FILES
+*.log
+public/*.sql
+public/*.sql.gz
+
+### SERVER FILES
+node_modules
+node_modules/
+.sass-cache/
